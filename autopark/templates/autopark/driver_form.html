@@ -1,0 +1,7 @@
+<h2>Добавить нового водителя:</h2>
+
+<form action="{% url 'autopark:driver_form' %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit"> Добавить водителя </button>
+</form>
