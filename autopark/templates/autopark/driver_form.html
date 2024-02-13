@@ -1,8 +1,0 @@
-<h2>Добавить нового водителя:</h2>
-
-<form method="post">
-    {% csrf_token %}
-    {{reg_form.as_p}}
-    {{driver_form.as_p}}
-    <button type="submit"> Добавить водителя </button>
-</form>
