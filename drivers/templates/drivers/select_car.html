@@ -1,0 +1,19 @@
+{% extends "drivers/base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel='stylesheet' href='{% static "css/cars.css" %}' type='text/css'>
+
+<div class="cars">
+    {% for car in cars %}
+        <div class="car">
+      <h2>{{car.brand.name}} {{car.model}}</h2>
+      <p>  Color is {{car.color}} </p>
+      <p>  Year is {{car.year}} </p>
+      <p>  Category is {{car.category}} </p>
+        </div>
+    {% endfor %}
+    </div>
+
+
+{% endblock content %}
