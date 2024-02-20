@@ -69,6 +69,6 @@ def log_out(request):
 def select_car(request):
     title = 'Choose a car'
     cars = Car.objects.filter(status=True)
-    context={'title': title, 'cars': cars}
+    context ={ 'title': title, 'cars': cars}
 
     return render(request, 'drivers/select_car.html', context=context)
