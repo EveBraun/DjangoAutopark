@@ -2,12 +2,17 @@ from django.db import models
 from .enums import car_categories, car_colors
 from django.contrib.auth.models import User
 
+
 class CarBrand(models.Model):
     name = models.CharField(max_length=20, verbose_name="Бренд")
 
     class Meta:
         verbose_name = "Бренд"
         verbose_name_plural = "Бренды"
+
+    def __str__(self):
+        return self.name
+
 
 
 class Car(models.Model):   
@@ -18,14 +23,14 @@ class Car(models.Model):
     year = models.IntegerField(verbose_name="Год выпуска")
     image = models.ImageField(upload_to="cars/", blank=True, null=True, verbose_name="Изображение")
     category = models.CharField(max_length=10, choices=car_categories, verbose_name="Класс")
-    status = models.BooleanField(default=True, verbose_name="Status")
+    status = models.BooleanField(default=True, verbose_name="Status", editable=False)
 
     class Meta:
         verbose_name = "Машина"
         verbose_name_plural="Машины"
 
     def __str__(self):
-        return " ".join([self.brand, self.model, str(self.year)])
+        return " ".join([self.brand.name, self.model, str(self.year)])
 
 
 
@@ -36,8 +41,8 @@ class Department(models.Model):
         verbose_name = "Department"
         verbose_name_plural = "Department"
 
-        def __str__(self):
-            return self.name
+    def __str__(self):
+        return self.name
     
 
 
@@ -50,8 +55,8 @@ class Position(models.Model):
         verbose_name = "Position"
         verbose_name_plural = "Positions"
 
-        def __str__(self):
-            return self.name
+    def __str__(self):
+        return self.name
 
 
 
