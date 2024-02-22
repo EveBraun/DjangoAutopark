@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from .forms import RegistrationForm, DriverForm
 from AutoparkProject.utils import calculate_age
@@ -72,3 +73,8 @@ def select_car(request):
     context ={ 'title': title, 'cars': cars}
 
     return render(request, 'drivers/select_car.html', context=context)
+
+
+def test_fetch(request):
+    car = request.POST.get('carId')
+    return JsonResponse(car)
