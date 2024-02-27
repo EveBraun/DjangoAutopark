@@ -8,23 +8,29 @@
 <script>
   async function selectCar(carId) {
     let car = {
-      id: carId
-    }
+      id: carId,
+    };
 
-    const csrftoken = Cockies.get('csrftoken')
 
-    let response = await fetch('/test_fetch/', {
+    let response = await fetch('/drivers/test_fetch/', {
       method: "POST", 
       headers: {
-        "Content-Type": "application/json", "X-CSRFToken": csrftoken},
-        body: JSON.stringify({carId: carId})
+        "Content-Type": "application/json", "X-CSRFToken": '{% csrf_token %}'},
+        body: JSON.stringify(car),
+        credentials: 'same-origin',
+
     }
     );
-    
+
+    let result = await response.json();
+    console.log(result)
   }
 </script>
 
 
+<div class="car-count">
+Количество доступных машин: <span> {{count}} </span>
+</div>
 
 <div class="cars">
     {% for car in cars %}
@@ -35,7 +41,7 @@
       <p>  Category is {{car.category}} </p>
         
       
-      <p><href="{% url 'drivers:select_car' pk=car.id %}"> CHOOSE </href></p>
+      <p><a href="{% url 'drivers:select_car' pk=car.id %}"> CHOOSE </a></p>
       <button onclick="selectCar('{{car.id}}')">CHOOSE</button>
     </div>
 
