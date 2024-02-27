@@ -4,16 +4,19 @@
 {% block content %}
 <link rel='stylesheet' href='{% static "css/cars.css" %}' type='text/css'>
 
+
 <script>
   async function selectCar(carId) {
     let car = {
       id: carId
     }
 
+    const csrftoken = Cockies.get('csrftoken')
+
     let response = await fetch('/test_fetch/', {
       method: "POST", 
       headers: {
-        "Content-Type": "application/json"},
+        "Content-Type": "application/json", "X-CSRFToken": csrftoken},
         body: JSON.stringify({carId: carId})
     }
     );
