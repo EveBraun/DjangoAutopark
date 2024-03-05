@@ -26,3 +26,14 @@ class CarDriver(models.Model):
     car = models.ForeignKey(Car, on_delete=models.SET_NULL, null=True)
 
     
+    # def get_driver_name(self):
+    #     return ": ".join([self.driver.name, self.driver.lastname])
+    
+    
+    # def get_car_name(self):
+    #     return ": ".join([self.car.brand, self.car.model]) 
+
+    def __str__(self):
+        return ": ".join([self.driver.name, self.car.brand.name])
+
+    
