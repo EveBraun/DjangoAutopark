@@ -162,7 +162,7 @@ def refuse_car(request):
             car.save()
             driver.cardriver_set.first().delete()
             
-            return redirect("drivers:profile", pk=request.user.pk)
-
-    else:
         return redirect("drivers:profile", pk=request.user.pk)
+        
+
+   
