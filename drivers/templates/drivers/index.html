@@ -2,6 +2,8 @@
 
 {% block menu %}
 <h1>Главная страница</h1>
-<p><a href="{% url 'drivers:profile' pk=request.user.id %}"> MY PROFILE </a></p>
+{% if user.is_authenticated %}
+    <p><a href="{% url 'drivers:profile' pk=request.user.id %}"> MY PROFILE </a></p>
+{% endif %}
 <p><a href="{% url 'drivers:select_car' %}"> CHOSE A CAR </a></p>
 {% endblock menu %}

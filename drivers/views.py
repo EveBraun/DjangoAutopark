@@ -93,7 +93,8 @@ def select_car(request):
         if driver.cardriver_set.first() is not None:
             current_car_id = driver.cardriver_set.first().car.id
             current_car = Car.objects.get(pk=current_car_id)
-            current_car.update(status=True)
+            current_car.status=True
+            current_car.save()
             # driver.cardriver_set.first().car.status = True
             driver.cardriver_set.update(car=new_car)
 
@@ -102,6 +103,7 @@ def select_car(request):
 
         new_car.status = False
         new_car.save()
+        return redirect("drivers:profile", pk=request.user.id)
 
     
     
@@ -153,9 +155,14 @@ def refuse_car(request):
     if request.method == "POST":
         if 'refuse' in request.POST:
             driver = Driver.objects.get(user=request.user)
-            driver.cardriver_set.first.car.status = False
-            driver.cardriver_set.first.delete()
-            return redirect("drivers:profile")
+            car_id = driver.cardriver_set.first().car.id
+            car = Car.objects.get(pk=car_id)
+            car.status = True
+            
+            car.save()
+            driver.cardriver_set.first().delete()
+            
+            return redirect("drivers:profile", pk=request.user.pk)
 
     else:
-        return redirect("drivers:profile")
+        return redirect("drivers:profile", pk=request.user.pk)
