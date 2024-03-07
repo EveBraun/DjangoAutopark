@@ -91,8 +91,17 @@ def select_car(request):
         driver = Driver.objects.get(user=request.user)
 
         if driver.cardriver_set.first() is not None:
-            if driver.cardriver_set.first().car is not None:
-                driver.cardriver_set.update(car=new_car)
+            current_car_id = driver.cardriver_set.first().car.id
+            current_car = Car.objects.get(pk=current_car_id)
+            current_car.update(status=True)
+            # driver.cardriver_set.first().car.status = True
+            driver.cardriver_set.update(car=new_car)
+
+        else:
+            CarDriver.objects.create(driver=driver, car=new_car)
+
+        new_car.status = False
+        new_car.save()
 
     
     
