@@ -19,11 +19,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from drivers import urls as autopark_urls
+from users import urls as users_urls
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('drivers/', include(autopark_urls))
+    path('drivers/', include(autopark_urls)),
+    path('users/', include(users_urls))
 ]
 
 
